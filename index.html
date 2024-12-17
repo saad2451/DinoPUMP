@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniApp Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>MiniApp Game</h1>
+    <div class="stats">
+      <span id="coins">Coins: 0</span>
+      <span id="income">Hourly Income: 0</span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="dinosaur-container">
+      <img id="dinosaur" src="dinosaur.png" alt="Dinosaur" onclick="addCoins()">
+    </div>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <footer>
+    <nav>
+      <button onclick="navigate('home')">Home</button>
+      <button onclick="navigate('cart')">Cart Combo</button>
+      <button onclick="navigate('friends')">Infinity Friend</button>
+      <button onclick="navigate('tasks')">Tasks</button>
+    </nav>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    let coins = 0;
+    let hourlyIncome = 0;
+
+    // Add coins when clicking the dinosaur
+    function addCoins() {
+      coins += 10;
+      document.getElementById('coins').innerText = `Coins: ${coins}`;
+    }
+
+    // Navigate between sections
+    function navigate(section) {
+      alert(`Navigating to ${section}`);
+    }
+
+    // Increase coins hourly based on income
+    setInterval(() => {
+      coins += hourlyIncome;
+      document.getElementById('coins').innerText = `Coins: ${coins}`;
+    }, 3600000); // 1 hour
+  </script>
+</body>
+</html>
