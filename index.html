@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dino Pump - Index</title>
+    <title>Dino Pump - Modified</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,16 +20,21 @@
         }
 
         .counter {
-            margin-top: 50px;
+            margin-top: 20px;
             font-size: 2em;
             font-weight: bold;
             color: #333;
         }
 
+        .dino {
+            margin: 20px auto;
+            cursor: pointer;
+        }
+
         .click-button {
-            margin-top: 20px;
+            margin-top: 10px;
             padding: 15px 30px;
-            font-size: 1.5em;
+            font-size: 1.2em;
             background-color: #4caf50;
             color: white;
             border: none;
@@ -42,35 +47,107 @@
         }
 
         .footer {
-            margin-top: 50px;
+            margin-top: 30px;
             font-size: 0.8em;
             color: #888;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            background-color: #ddd;
+            padding: 15px;
+        }
+
+        .navigation div {
+            flex: 1;
+            font-size: 1.2em;
+            cursor: pointer;
+            padding: 10px 0;
+        }
+
+        .navigation div:hover {
+            background-color: #bbb;
+        }
+
+        .store {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e6f7e6;
+            border: 1px solid #4caf50;
+            display: none; /* يتم عرضه فقط عند الحاجة */
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>مرحبا بك في Dino Pump</h1>
-        <p>ابدأ بجمع النقاط الآن!</p>
+        <h1>مرحباً بك في Dino Pump</h1>
+        <p>اضغط على الديناصور لجمع العملات!</p>
     </div>
 
     <div class="counter">
-        النقاط: <span id="points">0</span>
+        العملات: <span id="coins">0</span>
     </div>
 
-    <button class="click-button" onclick="addPoints()">اضغط هنا لجمع النقاط</button>
+    <img src="https://via.placeholder.com/150" alt="Dino" class="dino" onclick="addCoins()">
+
+    <button class="click-button" onclick="openStore()">افتح المتجر</button>
+
+    <div class="store" id="store">
+        <h2>المتجر</h2>
+        <p>يمكنك شراء كروت إلكترونية أو العثور على البطاقات هنا.</p>
+        <button onclick="buyItem('card')">شراء بطاقة</button>
+        <button onclick="buyItem('combo')">شراء كومبو</button>
+    </div>
+
+    <div class="navigation">
+        <div onclick="navigateTo('home')">🏠 Home</div>
+        <div onclick="navigateTo('tasks')">📋 Task</div>
+        <div onclick="navigateTo('friends')">👥 Friends</div>
+    </div>
 
     <div class="footer">
         <p>© 2024 Dino Pump. جميع الحقوق محفوظة.</p>
     </div>
 
     <script>
-        let points = 0;
+        let coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
 
-        function addPoints() {
-            points += 10; // أضف 10 نقاط لكل نقرة
-            document.getElementById("points").textContent = points;
+        function updateCoinsDisplay() {
+            document.getElementById("coins").textContent = coins;
         }
+
+        function addCoins() {
+            coins += 10; // إضافة 10 عملات لكل نقرة
+            localStorage.setItem("coins", coins); // حفظ العملات في التخزين المحلي
+            updateCoinsDisplay();
+        }
+
+        function openStore() {
+            const store = document.getElementById("store");
+            store.style.display = store.style.display === "block" ? "none" : "block";
+        }
+
+        function buyItem(item) {
+            if (item === "card" && coins >= 50) {
+                coins -= 50; // خصم 50 عملة لشراء البطاقة
+                alert("تم شراء بطاقة إلكترونية!");
+            } else if (item === "combo" && coins >= 100) {
+                coins -= 100; // خصم 100 عملة للكومبو
+                alert("تم شراء كومبو العثور على البطاقات!");
+            } else {
+                alert("لا تملك عملات كافية!");
+            }
+            localStorage.setItem("coins", coins);
+            updateCoinsDisplay();
+        }
+
+        function navigateTo(page) {
+            alert(`تم الانتقال إلى صفحة ${page}`);
+        }
+
+        window.onload = updateCoinsDisplay;
     </script>
 </body>
 </html>
