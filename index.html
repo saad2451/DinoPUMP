@@ -1,59 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MiniApp Game</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino Pump - Index</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+        .header {
+            background-color: #4caf50;
+            color: white;
+            padding: 15px;
+        }
+
+        .counter {
+            margin-top: 50px;
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .click-button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.5em;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .click-button:hover {
+            background-color: #45a049;
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 0.8em;
+            color: #888;
+        }
+    </style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <h1>MiniApp Game</h1>
-    <div class="stats">
-      <span id="coins">Coins: 0</span>
-      <span id="income">Hourly Income: 0</span>
+    <div class="header">
+        <h1>مرحبا بك في Dino Pump</h1>
+        <p>ابدأ بجمع النقاط الآن!</p>
     </div>
-  </header>
 
-  <!-- Main Content -->
-  <main>
-    <div class="dinosaur-container">
-      <img id="dinosaur" src="dinosaur.png" alt="Dinosaur" onclick="addCoins()">
+    <div class="counter">
+        النقاط: <span id="points">0</span>
     </div>
-  </main>
 
-  <!-- Bottom Navigation -->
-  <footer>
-    <nav>
-      <button onclick="navigate('home')">Home</button>
-      <button onclick="navigate('cart')">Cart Combo</button>
-      <button onclick="navigate('friends')">Infinity Friend</button>
-      <button onclick="navigate('tasks')">Tasks</button>
-    </nav>
-  </footer>
+    <button class="click-button" onclick="addPoints()">اضغط هنا لجمع النقاط</button>
 
-  <!-- Scripts -->
-  <script>
-    let coins = 0;
-    let hourlyIncome = 0;
+    <div class="footer">
+        <p>© 2024 Dino Pump. جميع الحقوق محفوظة.</p>
+    </div>
 
-    // Add coins when clicking the dinosaur
-    function addCoins() {
-      coins += 10;
-      document.getElementById('coins').innerText = `Coins: ${coins}`;
-    }
+    <script>
+        let points = 0;
 
-    // Navigate between sections
-    function navigate(section) {
-      alert(`Navigating to ${section}`);
-    }
-
-    // Increase coins hourly based on income
-    setInterval(() => {
-      coins += hourlyIncome;
-      document.getElementById('coins').innerText = `Coins: ${coins}`;
-    }, 3600000); // 1 hour
-  </script>
+        function addPoints() {
+            points += 10; // أضف 10 نقاط لكل نقرة
+            document.getElementById("points").textContent = points;
+        }
+    </script>
 </body>
 </html>
